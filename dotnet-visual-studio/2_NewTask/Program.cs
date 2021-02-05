@@ -1,6 +1,7 @@
 ﻿using System;
 using RabbitMQ.Client;
 using System.Text;
+using System.Threading;
 
 class Program
 {
@@ -18,8 +19,12 @@ class Program
             var properties = channel.CreateBasicProperties();
             properties.Persistent = true;
 
-            channel.BasicPublish(exchange: "", routingKey: "task_queue", basicProperties: properties, body: body);
-            Console.WriteLine(" [x] Sent {0}", message);
+            for(int i = 0;i<50;i++)
+            {
+                channel.BasicPublish(exchange: "", routingKey: "task_queue", basicProperties: properties, body: body);
+                Console.WriteLine(" [x] Sent {0}", message);
+                Thread.Sleep(1000);
+            }
         }
 
         Console.WriteLine(" Press [enter] to exit.");

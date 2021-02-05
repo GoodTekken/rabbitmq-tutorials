@@ -14,16 +14,17 @@ class Program
             channel.ExchangeDeclare(exchange: "direct_logs", type: "direct");
             var queueName = channel.QueueDeclare().QueueName;
 
-            if (args.Length < 1)
-            {
-                Console.Error.WriteLine("Usage: {0} [info] [warning] [error]", Environment.GetCommandLineArgs()[0]);
-                Console.WriteLine(" Press [enter] to exit.");
-                Console.ReadLine();
-                Environment.ExitCode = 1;
-                return;
-            }
+            //if (args.Length < 1)
+            //{
+            //    Console.Error.WriteLine("Usage: {0} [info] [warning] [error]", Environment.GetCommandLineArgs()[0]);
+            //    Console.WriteLine(" Press [enter] to exit.");
+            //    Console.ReadLine();
+            //    Environment.ExitCode = 1;
+            //    return;
+            //}
+            string[] args1 = { "info", "warning", "error"};
 
-            foreach(var severity in args)
+            foreach (var severity in args1)
             {
                 channel.QueueBind(queue: queueName, exchange: "direct_logs", routingKey: severity);
             }

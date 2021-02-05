@@ -14,16 +14,18 @@ class Program
             channel.ExchangeDeclare(exchange: "topic_logs", type: "topic");
             var queueName = channel.QueueDeclare().QueueName;
 
-            if (args.Length < 1)
-            {
-                Console.Error.WriteLine("Usage: {0} [binding_key...]", Environment.GetCommandLineArgs()[0]);
-                Console.WriteLine(" Press [enter] to exit.");
-                Console.ReadLine();
-                Environment.ExitCode = 1;
-                return;
-            }
+            //if (args.Length < 1)
+            //{
+            //    Console.Error.WriteLine("Usage: {0} [binding_key...]", Environment.GetCommandLineArgs()[0]);
+            //    Console.WriteLine(" Press [enter] to exit.");
+            //    Console.ReadLine();
+            //    Environment.ExitCode = 1;
+            //    return;
+            //}
 
-            foreach(var bindingKey in args)
+            string[] args1 = { "*.info", "*.warning.#", "*.error" , "anonymous.#", "#.info" };
+
+            foreach (var bindingKey in args1)
             {
                 channel.QueueBind(queue: queueName, exchange: "topic_logs", routingKey: bindingKey);
             }

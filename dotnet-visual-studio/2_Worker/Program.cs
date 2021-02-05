@@ -14,7 +14,7 @@ class Program
         {
             channel.QueueDeclare(queue: "task_queue", durable: true, exclusive: false, autoDelete: false, arguments: null);
 
-            channel.BasicQos(prefetchSize: 0, prefetchCount: 1, global: false);
+            channel.BasicQos(prefetchSize: 0, prefetchCount: 1, global: false);  //Add the prefetchCount
 
             Console.WriteLine(" [*] Waiting for messages.");
 

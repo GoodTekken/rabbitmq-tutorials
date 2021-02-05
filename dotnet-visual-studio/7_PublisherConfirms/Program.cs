@@ -15,6 +15,8 @@ class PublisherConfirms
         PublishMessagesIndividually();
         PublishMessagesInBatch();
         HandlePublishConfirmsAsynchronously();
+
+        Console.ReadLine();
     }
 
     private static IConnection CreateConnection()
